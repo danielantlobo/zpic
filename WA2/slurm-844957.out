@@ -1,0 +1,29 @@
+rm -f zpic src/*.o src/input/*.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/current.c -o src/current.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/emf.c -o src/emf.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/random.c -o src/random.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/timer.c -o src/timer.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/main.c -o src/main.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/simulation.c -o src/simulation.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/zdf.c -o src/zdf.o
+nvcc -c -O3 -arch=sm_80 -Isrc src/particles.cu -o src/particles.o
+gcc -c -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc -I/eb/x86_64/software/CUDA/12.9.1/include -D_XOPEN_SOURCE=600 -Wno-pedantic src/input/twostream.c -o src/input/twostream.o
+gcc src/current.o src/emf.o src/random.o src/timer.o src/main.o src/simulation.o src/zdf.o src/particles.o src/input/twostream.o -o zpic -lm -fopenmp -Wl,--allow-multiple-definition -L/eb/x86_64/software/CUDA/12.9.1/lib64 -lcudart
+
+Simulation ended.
+
+Time for spec. advance = 0.985470 s
+Time for emf   advance = 0.000327 s
+Total simulation time  = 0.988554 s
+
+Particle advance [nsec/part] = 16.391717 
+Particle advance [Mpart/sec] = 61.006423 
+Starting simulation ...
+
+n = 0, t = 0.0
+Energy (fields | particles | total) = 7.321633e-10 4.977605e-01 4.977605e-01
+n = 501, t = 50.100002
+Energy (fields | particles | total) = 2.354279e-02 4.650175e-01 4.885603e-01
+Initial energy: 4.977605e-01, Final energy: 4.885603e-01
+
+Final energy different from Initial Energy. Change in total energy is: 1.88 % 
