@@ -1,2 +1,3 @@
-# zpic_CompParalela
-This repository holds the files for the Computação Paralela Course (2025-2026)
+# ZPIC on NVIDIA A100 (CUDA)
+
+See the [top-level README](../README.md) for results, build/run steps and limitations. Report: [report.pdf](report.pdf).
