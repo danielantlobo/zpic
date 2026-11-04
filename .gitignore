@@ -1,0 +1,7 @@
+.DS_Store
+.idea/
+*.o
+zpic
+results/
+slurm-*.out
+!WA2/slurm-844957.out
