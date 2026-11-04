@@ -10,6 +10,11 @@ CFLAGS = -Ofast -g -std=c99 -Wall -fopenmp -march=native -Isrc $(CUDA_INC) -D_XO
 #NCCFLAGS = -Wno-deprecated-gpu-targets -arch=sm_35 -O2 -g -std=c++11
 
 NVCCFLAGS = -O3 -arch=sm_80 -Isrc
+
+# Optional: particles per cell for the twostream deck (default 500), e.g. make PPC=4000
+ifdef PPC
+CFLAGS += -DZPIC_PPC=$(PPC)
+endif
 LDFLAGS = -lm -fopenmp -Wl,--allow-multiple-definition $(CUDA_LIB)
 SRCDIR = src
 INPUTDIR = src/input
