@@ -25,8 +25,12 @@ void sim_init( t_simulation* sim ){
     // Initialize particles
 	const int n_species = 2;
 
-	// Use 1000 particles per cell
-	int ppc = 500;
+	// Particles per cell: 500 by default (the validated configuration).
+	// Override at build time with `make PPC=4000` (defines ZPIC_PPC).
+#ifndef ZPIC_PPC
+#define ZPIC_PPC 500
+#endif
+	int ppc = ZPIC_PPC;
 
 	t_species* species = (t_species *) malloc( n_species * sizeof( t_species ));
 
